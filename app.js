@@ -9,6 +9,9 @@ const timeList = document.querySelector(".time-list");
 const infoBtn = document.querySelector(".info");
 const modalShadow = document.querySelector(".modal-shadow");
 const closeModalBtn = document.querySelector(".close");
+const colorsBtn = document.querySelector(".colors");
+let root = document.documentElement;
+let colorCounter = 0;
 
 let countTime;
 let minutes = 0;
@@ -76,6 +79,20 @@ const hideModal = () => {
 	modalShadow.style.display = "none";
 };
 
+const changeColor = () => {
+
+	if (colorCounter === 0) {
+		root.style.setProperty("--first-color", "rgb(6,173,250)");
+		colorCounter++;
+	} else if (colorCounter === 1) {
+		root.style.setProperty("--first-color", "rgb(0,255,42)");
+		colorCounter++;
+	} else {
+		root.style.setProperty("--first-color", "rgb(250,20,6)");
+		colorCounter = 0;
+	}
+};
+
 const clearStuff = () => {
 	clearInterval(countTime);
 	startBtn.addEventListener("click", handleStart);
@@ -92,6 +109,7 @@ resetBtn.addEventListener("click", handleReset);
 historyBtn.addEventListener("click", showHistory);
 infoBtn.addEventListener("click", showModal);
 closeModalBtn.addEventListener("click", hideModal);
+colorsBtn.addEventListener("click", changeColor);
 window.addEventListener("click", (e) =>
 	e.target === modalShadow ? hideModal() : false
 );
